@@ -38,7 +38,7 @@
 							<span class="input-group-text"> First Name</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.contactFirstName"
+							[(ngModel)]="editingCustomer.names.first"
 
 							name="contactFirstName"
 							placeholder="First Name"
@@ -47,7 +47,7 @@
 							class="form-control"
 						/>
 						<input
-							[(ngModel)]="editingCustomer.contactLastName"
+							[(ngModel)]="editingCustomer.names.last"
 							
 							name="contactLastName"
 							placeholder="Last Name"
@@ -62,7 +62,7 @@
 							<span class="input-group-text">Company</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.customerName"
+							[(ngModel)]="editingCustomer.companyName"
 							
 							name="customerName"
 							placeholder="Enter Company Name"
@@ -77,7 +77,7 @@
 							<span class="input-group-text">Address Line 1</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.addressLine1"
+							[(ngModel)]="editingCustomer.address.line1"
 							
 							name="addressLine1"
 							placeholder="Enter Address Line 1"
@@ -91,28 +91,22 @@
 							<span class="input-group-text">Address Line 2</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.addressLine2"
+							[(ngModel)]="editingCustomer.address.line2"
 							
-							name="addressLine1"
+							name="addressLine2"
 							placeholder="Enter Address Line 2"
 							
 							type="text"
 							class="form-control col-sm-9"
 						/>
 					</div>
-
-					<div class="input-group mb-3">
-						<div class="input-group-prepend col-sm-3">
-							<span class="input-group-text">Address</span>
-						</div>
-						<textarea class="form-control col-sm-9" id="custAddress" rows="3" placeholder="Enter Customer's Address"></textarea>
-					</div>
+					
 					<div class="input-group mb-3">
 						<div class="input-group-prepend col-sm-3">
 							<span class="input-group-text"> City & State</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.city"
+							[(ngModel)]="editingCustomer.address.city"
 
 							name="city"
 							placeholder="City"
@@ -121,7 +115,7 @@
 							class="form-control"
 						/>
 						<input
-							[(ngModel)]="editingCustomer.state"
+							[(ngModel)]="editingCustomer.address.state"
 							
 							name="state"
 							placeholder="State"
@@ -130,20 +124,35 @@
 							class="form-control"
 						/>
 					</div>
-					
-					
+
 					<div class="input-group mb-3">
 						<div class="input-group-prepend col-sm-3">
 							<span class="input-group-text">Phone</span>
 						</div>
-						<input type="text" class="form-control col-sm-9" id="custPhone" placeholder="Enter Phone Number"/>
+						<input
+							[(ngModel)]="editingCustomer.phone"
+							
+							name="phone"
+							placeholder="Enter Phone Number"
+							
+							type="text"
+							class="form-control"
+						/>
 					</div>
 					
 					<div class="input-group mb-3">
 						<div class="input-group-prepend col-sm-3">
 							<span class="input-group-text">Credit Limit</span>
 						</div>
-						<input type="text" class="form-control col-sm-7" id="custCreditLimit" placeholder="Enter Credit Limit"/>
+						<input
+							[(ngModel)]="editingCustomer.creditLimit"
+							
+							name="creditLimit"
+							placeholder="Enter Credit Limit"
+							
+							type="text"
+							class="form-control"
+						/>
 						<div class="input-group-append">
 							<span class="input-group-text col-sm-2">.00</span>
 						</div>
@@ -177,7 +186,7 @@
 					</div>
 				
 					<div class="value" style="grid-column: 3 / 7; ">
-						{{customer.customerName}}
+						{{customer.companyName}}
 					</div>
 				
 					<div class="label" style="grid-column: 1 / 4;">
@@ -189,7 +198,7 @@
 					</div>
 				
 					<div class="value" style="grid-column: 1 / 4;">
-						{{customer.city}}
+						{{customer.address.city}}
 					</div>			
 				
 					<div class="value" style="grid-column: 4 / 7;">
@@ -205,7 +214,7 @@
 					</div>
 				
 					<div class="value" style="grid-column: 1 / 4;">
-						{{customer.country}}
+						{{customer.address.country}}
 					</div>
 				
 					<div class="value" style="grid-column: 4 / 7;">
@@ -243,14 +252,14 @@
 		</tr>
 		<tr *ngFor="let customer of customersList; let indexOfelement=index;" [ngClass]="{'table-primary' : (indexOfelement%2==1), 'table-light' : (indexOfelement%2==0)}">
 			<td>{{customer.customerNumber}}</td>
-			<td>{{customer.contactFirstName}} {{customer.contactLastName}}</td>
-			<td>{{customer.customerName}}</td>
+			<td>{{customer.names.first}} {{customer.names.last}}</td>
+			<td>{{customer.companyName}}</td>
 			<td>{{customer.phone}}</td>
 			<td>
-				{{customer.addressLine1}},
-				{{customer.addressLine2}},
-				{{customer.city}}, {{customer.state}},
-				{{customer.country}} - {{customer.zipCode}}
+				{{customer.address.line1}},
+				{{customer.address.line2}},
+				{{customer.address.city}}, {{customer.address.state}},
+				{{customer.address.country}} - {{customer.address.zipCode}}
 			</td>
 			<td>{{customer.salesRepEmpNumber}}</td>
 			<td>$ {{customer.creditLimit}}</td>

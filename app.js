@@ -9,7 +9,7 @@
 
 	const routesHandler = require(`./api/routes`);
 
-	mongoose.connect(`mongodb://localhost:27017/customerInfo`);
+	mongoose.connect(`mongodb://localhost:27017/customersManagement`, {useNewUrlParser: true});
 
 	mongoose.connection.on(`connected`, ()=>{
 		console.log(`Connected to to MongoDB`);
@@ -29,15 +29,17 @@
 		});
 	});
 	
-	//Define files for different categories
-	app.use(`/api/customer`, routesHandler);
-	
 	//Middleware
 	app.use(cors());
 	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
 	
 	//Static files
-	app.use(express.static(path.join(__dirname, `public`)));
+	// app.use(express.static(path.join(__dirname, `public`)));
+
+	//Define files for different categories
+	app.use(`/api/customer`, routesHandler);
+
 	
 	// Start API server
 	const port = 54321;

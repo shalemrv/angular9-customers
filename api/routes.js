@@ -85,6 +85,57 @@ router.post(`/add`, (req, res, next)=>{
 	// });
 });
 
+router.post(`/update`, (req, res, next)=>{
+	let editedCustomer = req.body;
+
+	const namesObject = {
+		first	: editedCustomer.names.first,
+		last 	: editedCustomer.names.last,
+	};
+
+	const addressObject = {
+		line1	: (editedCustomer.line1)? editedCustomer.line1 : "",
+		line2	: (editedCustomer.line2)? editedCustomer.line2 : "",
+		city	: (editedCustomer.city)? editedCustomer.city : "",
+		state	: (editedCustomer.state)? editedCustomer.state : "",
+		zipCode	: (editedCustomer.zipCode)? editedCustomer.zipCode : "",
+		country	: (editedCustomer.country)? editedCustomer.country : ""
+	};
+
+	editedCustomer.names 	= namesObject;
+	editedCustomer.address 	= addressObject;
+
+	// res.json({
+	// 	result		: addressObject
+	// });
+
+	// return;
+	
+	Customer.replaceOne(
+		{ _id : editedCustomer['_id']},
+		editedCustomer,
+		(err, result)=>{
+			if(err){
+				res.json({
+					complete	: false,
+					message		: `Failed to update customer. ${err}`,
+					result		: req.body
+				});
+				return;
+			}
+			
+			res.json({
+				complete	: true,
+				message		: `Customer updated successfully`
+			});
+		}
+
+
+
+
+	);
+});
+
 //Delete customer
 router.delete(`/:recordId`, (req, res, next)=>{
 	console.log("Delete Customer");

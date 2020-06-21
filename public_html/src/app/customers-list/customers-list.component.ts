@@ -16,9 +16,7 @@ export class CustomersListComponent implements OnInit {
 	editingCustomer = new Customer;
 	customersList 	= [];
 	gridView		= true;
-	contactFirstName = "Mark";
-	contactLastName = "Twain";
-
+	
 	getCustomersList(){
 		console.log("Angular retriving List.");
 		this.http.get(`http://127.0.0.1:54321/api/customer/list`).subscribe(
@@ -29,6 +27,7 @@ export class CustomersListComponent implements OnInit {
 					return;
 				}
 				this.customersList = response["result"];
+				this.editingCustomer = this.customersList[0];
 			}
 		);
 	}
@@ -65,7 +64,16 @@ export class CustomersListComponent implements OnInit {
 	}
 
 	submitEditedCustomer(){
-		console.log(`contactFirstName = ${this.contactFirstName}, contactLastName=${this.contactLastName}`);
+		console.log(`submitEditedCustomer`);
+		console.log(this.editingCustomer);
+
+		this.http.post(
+			`http://127.0.0.1:54321/api/customer/update`,
+			this.editingCustomer
+		).subscribe((response)=>{
+			console.log("update API");
+			console.log(response);
+		});
 	}
 
 	deleteThisCustomer(customerId:any){
