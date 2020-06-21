@@ -1,0 +1,58 @@
+.page-header{
+	padding: 30px 20px 15px 20px;
+	text-align: center;
+	display: grid;
+	grid-template-columns: 9fr 1fr;
+}
+.page-header .grid-list-button{
+	/* border-radius: 50%; */
+}
+.page-header svg{	
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+}
+
+.cCard{
+	width: 100%;	
+	border-radius: 10px;
+	padding:15px;
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 5px;
+	margin: 20px;
+	/* background-color: #13111c; */
+	border: 3px solid #828d9e;
+	border-radius: 10px 30px 10px 30px;
+	color: white;
+}
+
+
+.label, .value{
+	display: block;
+	text-align: center;
+}
+
+.label{
+	color: #828d9e;
+	font-size: 8px;
+	padding:5px;
+	margin-top: 20px;
+}
+
+.value{
+	font-size: 15px;
+	padding: 5px;
+	box-shadow: 0 4px 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+td, th{
+	text-shadow: 0 0 5px black;
+}
+
+.input-group{
+	box-shadow: 0 0 5px #828d9e;
+}

@@ -1,0 +1,259 @@
+<div class="page-header">
+	<div>
+		<h3>Customers List ({{customersList.length}})</h3>
+	</div>
+	<div style="text-align: right;">
+		<button type="button" class="btn btn-primary" (click)="addNewCustomer()">Add Customer</button>
+		<span class="grid-list-button">
+			<svg *ngIf="gridView" (click)="toggleGridView(false)" class="bi bi-list-ul" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+			</svg>
+		</span>
+		<span class="grid-list-button">
+			<svg *ngIf="!gridView" (click)="toggleGridView(true)" class="bi bi-grid-3x2-gap-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9z"/>
+			</svg>
+		</span>
+	
+	</div>
+</div>
+
+
+<div class="modal fade" id="editCustomer">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title">Editing Customer</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+			<form>
+				<fieldset>
+					<legend>Customer ID : {{editingCustomer.customerNumber}}</legend>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text"> First Name</span>
+						</div>
+						<input
+							[(ngModel)]="editingCustomer.contactFirstName"
+
+							name="contactFirstName"
+							placeholder="First Name"
+
+							type="text"
+							class="form-control"
+						/>
+						<input
+							[(ngModel)]="editingCustomer.contactLastName"
+							
+							name="contactLastName"
+							placeholder="Last Name"
+							
+							type="text"
+							class="form-control"
+						/>
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text">Company</span>
+						</div>
+						<input
+							[(ngModel)]="editingCustomer.customerName"
+							
+							name="customerName"
+							placeholder="Enter Company Name"
+							
+							type="text"
+							class="form-control col-sm-9"
+						/>
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text">Address Line 1</span>
+						</div>
+						<input
+							[(ngModel)]="editingCustomer.addressLine1"
+							
+							name="addressLine1"
+							placeholder="Enter Address Line 1"
+							
+							type="text"
+							class="form-control col-sm-9"
+						/>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text">Address Line 2</span>
+						</div>
+						<input
+							[(ngModel)]="editingCustomer.addressLine2"
+							
+							name="addressLine1"
+							placeholder="Enter Address Line 2"
+							
+							type="text"
+							class="form-control col-sm-9"
+						/>
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text">Address</span>
+						</div>
+						<textarea class="form-control col-sm-9" id="custAddress" rows="3" placeholder="Enter Customer's Address"></textarea>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text"> City & State</span>
+						</div>
+						<input
+							[(ngModel)]="editingCustomer.city"
+
+							name="city"
+							placeholder="City"
+
+							type="text"
+							class="form-control"
+						/>
+						<input
+							[(ngModel)]="editingCustomer.state"
+							
+							name="state"
+							placeholder="State"
+							
+							type="text"
+							class="form-control"
+						/>
+					</div>
+					
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text">Phone</span>
+						</div>
+						<input type="text" class="form-control col-sm-9" id="custPhone" placeholder="Enter Phone Number"/>
+					</div>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend col-sm-3">
+							<span class="input-group-text">Credit Limit</span>
+						</div>
+						<input type="text" class="form-control col-sm-7" id="custCreditLimit" placeholder="Enter Credit Limit"/>
+						<div class="input-group-append">
+							<span class="input-group-text col-sm-2">.00</span>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" (click)="submitEditedCustomer()">Save changes</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<div style="margin: 10px 25px 10px 0;" *ngIf="gridView">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let customer of customersList">
+				<div class="cCard">
+					<div class="label" style="grid-column: 1 / 3;">
+						ID
+					</div>
+				
+					<div class="label" style="grid-column: 3 / 7; ">
+						Name
+					</div>
+				
+					<div class="value" style="grid-column: 1 / 3;">
+						{{customer.customerNumber}}
+					</div>
+				
+					<div class="value" style="grid-column: 3 / 7; ">
+						{{customer.customerName}}
+					</div>
+				
+					<div class="label" style="grid-column: 1 / 4;">
+						City
+					</div>
+				
+					<div class="label" style="grid-column: 4 / 7;">
+						Phone
+					</div>
+				
+					<div class="value" style="grid-column: 1 / 4;">
+						{{customer.city}}
+					</div>			
+				
+					<div class="value" style="grid-column: 4 / 7;">
+						{{customer.phone}}
+					</div>
+				
+					<div class="label" style="grid-column: 1 / 4;">
+						Country
+					</div>
+				
+					<div class="label" style="grid-column: 4 / 7;">
+						Credit Limit
+					</div>
+				
+					<div class="value" style="grid-column: 1 / 4;">
+						{{customer.country}}
+					</div>
+				
+					<div class="value" style="grid-column: 4 / 7;">
+						{{customer.creditLimit}}
+					</div>
+				
+					<div class="label" style="grid-column: 1 / 4;">
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCustomer" (click)="editCustomer(customer)">
+							Edit Customer
+						</button>
+					</div>
+				
+					<div class="label" style="grid-column: 4 / 7;">
+						<button type="button" class="btn btn-danger btn-sm" (click)="deleteThisCustomer(customer._id)">
+							Delete Customer
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+<div style="text-align: center; margin : 20px 40px;" *ngIf="!gridView">
+	<table class="table table-hover">
+		<tr class="table-warning">
+			<th>ID</th>
+			<th>Name</th>
+			<th>Company</th>
+			<th>Phone</th>
+			<th>Address</th>
+			<th>Sales Rep</th>
+			<th>Credit Limit</th>
+		</tr>
+		<tr *ngFor="let customer of customersList; let indexOfelement=index;" [ngClass]="{'table-primary' : (indexOfelement%2==1), 'table-light' : (indexOfelement%2==0)}">
+			<td>{{customer.customerNumber}}</td>
+			<td>{{customer.contactFirstName}} {{customer.contactLastName}}</td>
+			<td>{{customer.customerName}}</td>
+			<td>{{customer.phone}}</td>
+			<td>
+				{{customer.addressLine1}},
+				{{customer.addressLine2}},
+				{{customer.city}}, {{customer.state}},
+				{{customer.country}} - {{customer.zipCode}}
+			</td>
+			<td>{{customer.salesRepEmpNumber}}</td>
+			<td>$ {{customer.creditLimit}}</td>
+		</tr>
+	</table>
+</div>
