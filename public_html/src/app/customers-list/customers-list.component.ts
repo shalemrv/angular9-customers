@@ -14,8 +14,13 @@ export class CustomersListComponent implements OnInit {
 	constructor(private http: HttpClient) { }
 	
 	editingCustomer = new Customer;
+	newCustomer =  new Customer;
 	customersList 	= [];
 	gridView		= true;
+	
+	toggleGridView = (turnOn : boolean)=>{
+		this.gridView = turnOn;
+	};
 	
 	getCustomersList(){
 		console.log("Angular retriving List.");
@@ -28,6 +33,12 @@ export class CustomersListComponent implements OnInit {
 				}
 				this.customersList = response["result"];
 				this.editingCustomer = this.customersList[0];
+
+				var customerIds : number[];
+
+				customerIds = this.customersList.map(customer => { return parseInt(customer.customerNumber) });
+				
+				this.newCustomer.customerNumber = Math.max(...customerIds) + 1;
 			}
 		);
 	}
@@ -35,21 +46,7 @@ export class CustomersListComponent implements OnInit {
 	addNewCustomer(){
 		this.http.post(
 			`http://127.0.0.1:54321/api/customer/add`,
-			{
-				customerNumber		: 126,
-				customerName		: "Shalomify Inc",
-				contactFirstName	: "Shalem",
-				contactLastName		: "Raj",
-				phone				: "9764976497",
-				addressLine1		: "10th Cross, Bilekahalli",
-				addressLine2		: "",
-				city				: "Bangalore",
-				state				: "Karnataka",
-				zipCode				: "560076",
-				country				: "India",
-				salesRepEmpNumber	: 3456,
-				creditLimit			: 25800
-			}
+			this.newCustomer
 		).subscribe((response)=>{
 			if(!response["complete"]){
 				alert(response["message"]);
@@ -88,13 +85,7 @@ export class CustomersListComponent implements OnInit {
 		});
 	}
 
-	toggleGridView(turnOn : boolean){
-		this.gridView = turnOn;
-	}
-
 	ngOnInit(){
 		this.getCustomersList();
 	}
-	
-
 }

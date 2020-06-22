@@ -104,12 +104,6 @@ router.post(`/update`, (req, res, next)=>{
 
 	editedCustomer.names 	= namesObject;
 	editedCustomer.address 	= addressObject;
-
-	// res.json({
-	// 	result		: addressObject
-	// });
-
-	// return;
 	
 	Customer.replaceOne(
 		{ _id : editedCustomer['_id']},

@@ -15,7 +15,7 @@ interface addressStruct{
 
 export class Customer{
 	_id ?: string;
-	customerNumber	: string;
+	customerNumber	: number;
 	companyName		: string;
 	phone			: string;
 	names			: namesStruct;
