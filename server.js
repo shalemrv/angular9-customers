@@ -9,10 +9,10 @@
 
 	const routesHandler = require(`./api/routes`);
 
-	mongoose.connect(`mongodb://localhost:27017/customersManagement`, {useNewUrlParser: true});
+	mongoose.connect(`mongodb://localhost:27017/customerInfo`, {useNewUrlParser: true});
 
 	mongoose.connection.on(`connected`, ()=>{
-		console.log(`Connected to to MongoDB`);
+		console.log(`Connected to MongoDB - customerInfo`);
 	})
 
 	mongoose.connection.on(`error`, (err)=>{

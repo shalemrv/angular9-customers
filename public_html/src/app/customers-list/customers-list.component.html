@@ -1,27 +1,31 @@
 <div class="page-header">
+	<div style="text-align: left;">
+		<span *ngIf="gridView" class="grid-list-button" (click)="toggleGridView(false)">
+			<svg class="bi bi-list-ul" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+			</svg>
+			&nbsp;
+			List View
+			&nbsp;
+		</span>
+		<span *ngIf="!gridView" class="grid-list-button" (click)="toggleGridView(true)">
+			<svg class="bi bi-grid-3x2-gap-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9z"/>
+			</svg>
+			&nbsp;
+			Grid View
+			&nbsp;
+		</span>
+	</div>
 	<div>
 		<h3>Customers List ({{customersList.length}})</h3>
 	</div>
 	<div style="text-align: right;">
-		<button type="button" class="btn btn-primary" (click)="addNewCustomer()"  data-toggle="modal" data-target="#addCustomerModal">Add Customer</button>
-		<span class="grid-list-button">
-			<svg *ngIf="gridView" (click)="toggleGridView(false)" class="bi bi-list-ul" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-			</svg>
-		</span>
-		<span class="grid-list-button">
-			<svg *ngIf="!gridView" (click)="toggleGridView(true)" class="bi bi-grid-3x2-gap-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9z"/>
-			</svg>
-		</span>
-	
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCustomerModal">Add Customer</button>	
 	</div>
 </div>
 
-<div>
-	<h1>gridView -- {{gridView}}</h1>
-</div>
-
+<!-- Grid View -->
 <div style="margin: 10px 25px 10px 0;" *ngIf="gridView">
 	<div class="container-fluid">
 		<div class="row">
@@ -40,7 +44,7 @@
 					</div>
 				
 					<div class="value" style="grid-column: 3 / 7; ">
-						{{customer.companyName}}
+						{{customer.customerName}}
 					</div>
 				
 					<div class="label" style="grid-column: 1 / 4;">
@@ -52,7 +56,7 @@
 					</div>
 				
 					<div class="value" style="grid-column: 1 / 4;">
-						{{customer.address.city}}
+						{{customer.city}}
 					</div>			
 				
 					<div class="value" style="grid-column: 4 / 7;">
@@ -68,21 +72,21 @@
 					</div>
 				
 					<div class="value" style="grid-column: 1 / 4;">
-						{{customer.address.country}}
+						{{customer.country}}
 					</div>
 				
 					<div class="value" style="grid-column: 4 / 7;">
 						{{customer.creditLimit}}
 					</div>
 				
-					<div class="label" style="grid-column: 1 / 4;">
+					<div class="gridActionButtons label" style="grid-column: 1 / 4;">
 						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCustomerModal" (click)="editCustomer(customer)">
 							Edit Customer
 						</button>
 					</div>
 				
-					<div class="label" style="grid-column: 4 / 7;">
-						<button type="button" class="btn btn-danger btn-sm" (click)="deleteThisCustomer(customer._id)">
+					<div class="gridActionButtons label" style="grid-column: 4 / 7;">
+						<button type="button" class="btn btn-danger btn-sm" (click)="deleteThisCustomer(customer)">
 							Delete Customer
 						</button>
 					</div>
@@ -93,6 +97,7 @@
 	</div>
 </div>
 
+<!-- List View -->
 <div style="text-align: center; margin : 20px 40px;" *ngIf="!gridView">
 	<table class="table table-hover">
 		<tr class="table-warning">
@@ -104,23 +109,39 @@
 			<th>Sales Rep</th>
 			<th>Credit Limit</th>
 		</tr>
-		<tr *ngFor="let customer of customersList; let indexOfelement=index;" [ngClass]="{'table-primary' : (indexOfelement%2==1), 'table-light' : (indexOfelement%2==0)}">
-			<td>{{customer.customerNumber}}</td>
-			<td>{{customer.names.first}} {{customer.names.last}}</td>
-			<td>{{customer.companyName}}</td>
-			<td>{{customer.phone}}</td>
-			<td>
-				{{customer.address.line1}},
-				{{customer.address.line2}},
-				{{customer.address.city}}, {{customer.address.state}},
-				{{customer.address.country}} - {{customer.address.zipCode}}
-			</td>
-			<td>{{customer.salesRepEmpNumber}}</td>
-			<td>$ {{customer.creditLimit}}</td>
-		</tr>
+		<tbody *ngFor="let customer of customersList; let indexOfelement=index;" style="position: relative;">
+			<div class="tableModifyDiv">
+				<button type="button" class="btn btn-danger btn-sm" (click)="deleteThisCustomer(customer)">
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+						<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+					</svg>
+				</button>
+				&nbsp;
+				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editCustomerModal" (click)="editCustomer(customer)">
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+					  </svg>
+				</button>
+			</div>
+			<tr [ngClass]="{'table-secondary' : (indexOfelement%2==1), 'table-light' : (indexOfelement%2==0)}" class="shiftRight">
+				<td>{{customer.customerNumber}}</td>
+				<td>{{customer.contactFirstName}} {{customer.contactLastName}}</td>
+				<td>{{customer.customerName}}</td>
+				<td>{{customer.phone}}</td>
+				<td>
+					{{customer.addressLine1}},
+					{{customer.addressLine2}},
+					{{customer.city}}, {{customer.state}},
+					{{customer.country}} - {{customer.zipCode}}
+				</td>
+				<td>{{customer.salesRepEmpNumber}}</td>
+				<td class="lastCell">$ {{customer.creditLimit}}</td>			
+			</tr>
+		</tbody>
 	</table>
 </div>
-
 
 <!-- Edit Existing customer -->
 <div class="modal fade" id="editCustomerModal">
@@ -142,7 +163,7 @@
 							<span class="input-group-text"> First Name</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.names.first"
+							[(ngModel)]="editingCustomer.contactFirstName"
 
 							name="contactFirstName"
 							placeholder="First Name"
@@ -151,7 +172,7 @@
 							class="form-control"
 						/>
 						<input
-							[(ngModel)]="editingCustomer.names.last"
+							[(ngModel)]="editingCustomer.contactLastName"
 							
 							name="contactLastName"
 							placeholder="Last Name"
@@ -166,7 +187,7 @@
 							<span class="input-group-text">Company</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.companyName"
+							[(ngModel)]="editingCustomer.customerName"
 							
 							name="customerName"
 							placeholder="Enter Company Name"
@@ -181,7 +202,7 @@
 							<span class="input-group-text">Address Line 1</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.address.line1"
+							[(ngModel)]="editingCustomer.addressLine1"
 							
 							name="addressLine1"
 							placeholder="Enter Address Line 1"
@@ -195,7 +216,7 @@
 							<span class="input-group-text">Address Line 2</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.address.line2"
+							[(ngModel)]="editingCustomer.addressLine2"
 							
 							name="addressLine2"
 							placeholder="Enter Address Line 2"
@@ -210,7 +231,7 @@
 							<span class="input-group-text"> City & State</span>
 						</div>
 						<input
-							[(ngModel)]="editingCustomer.address.city"
+							[(ngModel)]="editingCustomer.city"
 
 							name="city"
 							placeholder="City"
@@ -219,7 +240,7 @@
 							class="form-control"
 						/>
 						<input
-							[(ngModel)]="editingCustomer.address.state"
+							[(ngModel)]="editingCustomer.state"
 							
 							name="state"
 							placeholder="State"
@@ -286,13 +307,13 @@
 			<form>
 				<fieldset>
 					<legend>Customer ID : {{newCustomer.customerNumber}}</legend>
-
+					
 					<div class="input-group mb-3">
 						<div class="input-group-prepend col-sm-3">
 							<span class="input-group-text"> First Name</span>
 						</div>
 						<input
-							[(ngModel)]="newCustomer.names.first"
+							[(ngModel)]="newCustomer.contactFirstName"
 
 							name="contactFirstName"
 							placeholder="First Name"
@@ -301,7 +322,7 @@
 							class="form-control"
 						/>
 						<input
-							[(ngModel)]="newCustomer.names.last"
+							[(ngModel)]="newCustomer.contactLastName"
 							
 							name="contactLastName"
 							placeholder="Last Name"
@@ -316,7 +337,7 @@
 							<span class="input-group-text">Company</span>
 						</div>
 						<input
-							[(ngModel)]="newCustomer.companyName"
+							[(ngModel)]="newCustomer.customerName"
 							
 							name="customerName"
 							placeholder="Enter Company Name"
@@ -331,7 +352,7 @@
 							<span class="input-group-text">Address Line 1</span>
 						</div>
 						<input
-							[(ngModel)]="newCustomer.address.line1"
+							[(ngModel)]="newCustomer.addressLine1"
 							
 							name="addressLine1"
 							placeholder="Enter Address Line 1"
@@ -345,7 +366,7 @@
 							<span class="input-group-text">Address Line 2</span>
 						</div>
 						<input
-							[(ngModel)]="newCustomer.address.line2"
+							[(ngModel)]="newCustomer.addressLine2"
 							
 							name="addressLine2"
 							placeholder="Enter Address Line 2"
@@ -360,7 +381,7 @@
 							<span class="input-group-text"> City & State</span>
 						</div>
 						<input
-							[(ngModel)]="newCustomer.address.city"
+							[(ngModel)]="newCustomer.city"
 
 							name="city"
 							placeholder="City"
@@ -369,7 +390,7 @@
 							class="form-control"
 						/>
 						<input
-							[(ngModel)]="newCustomer.address.state"
+							[(ngModel)]="newCustomer.state"
 							
 							name="state"
 							placeholder="State"
@@ -415,7 +436,7 @@
 			</form>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-primary" (click)="submitEditedCustomer()">Save changes</button>
+			<button type="button" class="btn btn-primary" (click)="addNewCustomer()" data-dismiss="modal">Add Customer</button>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		</div>
 	  </div>

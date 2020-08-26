@@ -4,7 +4,7 @@
   "description": "simple retrieve app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "Shalem Raj V",
   "license": "ISC",

@@ -1,25 +1,17 @@
-
-interface namesStruct {
-	first : string,
-	last : string
-}
-
-interface addressStruct{
-	line1	: string,
-	line2	: string,
-	city	: string,
-	state	: string,
-	zipCode	: string,
-	country	: string,
-}
-
 export class Customer{
 	_id ?: string;
-	customerNumber	: number;
-	companyName		: string;
+
+	customerNumber	: string;
+	customerName	: string;
+	contactLastName	: string;
+	contactFirstName: string;
 	phone			: string;
-	names			: namesStruct;
-	address			: addressStruct;
-	salesRepEmpNumber	: number;
-	creditLimit			: number;
+	addressLine1	: string;
+	addressLine2	: string;
+	city			: string;
+	state			: string;
+	zipCode			: string;
+	country			: string;
+	salesRepEmpNumber	: string;
+	creditLimit		: string;
 }

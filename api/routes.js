@@ -9,101 +9,66 @@ const Customer		= require(`../models/customer`);
 router.get(`/list`, (req, res, next)=>{
 	var dateTimeNow = new Date();
 	console.log(`List retrieval @ ${dateTimeNow}`);
-	Customer.find((err, customersList)=>{
 
-		// customersList = customersList.map(customer => {
-		// 	return {
-		// 		_id				: customer._id,
-		// 		customerNumber	: customer.customerNumber,
-		// 		companyName		: customer.customerName,
-		// 		phone			: customer.phone,
-		// 		names 			: {
-		// 			first	: customer.contactFirstName,
-		// 			last	: customer.contactLastName,
-		// 		},
-		// 		address			: {
-		// 			line1	: customer.addressLine1,
-		// 			line2	: customer.addressLine2,
-		// 			city	: customer.city,
-		// 			state	: customer.state,
-		// 			zipCode	: customer.zipCode,
-		// 			country	: customer.country,
-		// 		},
-		// 		creditLimit		: customer.creditLimit,
-		// 		salesRepEmpNumber	: customer.salesRepEmpNumber
-		// 	};
-		// });
+	Customer.find().sort({ 'customerNumber' : -1}).exec((err, customersList)=>{
 		console.log(customersList);
 		res.json({
 			complete	: true,
 			message		: `List retrieval`,
 			result		: customersList
 		});
-	});	
+	});
+
+	// Customer.find((err, customersList)=>{
+	// 	console.log(customersList);
+	// 	res.json({
+	// 		complete	: true,
+	// 		message		: `List retrieval`,
+	// 		result		: customersList
+	// 	});
+	// });
 });
 
 //Add customer
 router.post(`/add`, (req, res, next)=>{
 	console.log("Add Customer");
-	// let newCustomer = new Customer({
-	// 	customerNumber		: req.body.customerNumber,
-	// 	customerName		: req.body.customerName,
-	// 	contactLastName		: req.body.contactLastName,
-	// 	contactFirstName	: req.body.contactFirstName,
-	// 	phone				: req.body.phone,
-	// 	addressLine1		: req.body.addressLine1,
-	// 	addressLine2		: req.body.addressLine2,
-	// 	city				: req.body.city,
-	// 	state				: req.body.state,
-	// 	zipCode				: req.body.zipCode,
-	// 	country				: req.body.country,
-	// 	salesRepEmpNumber	: req.body.salesRepEmpNumber,
-	// 	creditLimit			: req.body.creditLimit
-	// });
-
-	
-	res.json({
-		complete	: true,
-		message		: `Customer added successfully`,
-		result		: req.body
+	var finalResponse = {
+		complete	: false,
+		message		: `Failed to add customer - ${req.body.contactFirstName} ${req.body.contactFirstName}`
+	}
+	let newCustomer = new Customer({
+		customerNumber		: req.body.customerNumber,
+		customerName		: req.body.customerName,
+		contactLastName		: req.body.contactLastName,
+		contactFirstName	: req.body.contactFirstName,
+		phone				: req.body.phone,
+		addressLine1		: req.body.addressLine1,
+		addressLine2		: req.body.addressLine2,
+		city				: req.body.city,
+		state				: req.body.state,
+		zipCode				: req.body.zipCode,
+		country				: req.body.country,
+		salesRepEmpNumber	: req.body.salesRepEmpNumber,
+		creditLimit			: req.body.creditLimit
 	});
+	
+	newCustomer.save((err, customer)=>{
+		if(err){
+			finalResponse["ERROR"] = err;
+			res.json(finalResponse);
+			return;
+		}
 
-	// newCustomer.save((err, customer)=>{
-	// 	if(err){
-	// 		res.json({
-	// 			complete	: false,
-	// 			message		: `Failed to add customer. ${err}`,
-	// 			result		: req.body
-	// 		});
-	// 		return;
-	// 	}
-
-	// 	res.json({
-	// 		complete	: true,
-	// 		message		: `Customer added successfully`
-	// 	});
-	// });
+		res.json({
+			complete	: true,
+			message		: `Customer added successfully`,
+			result		: req.body
+		});
+	});
 });
 
 router.post(`/update`, (req, res, next)=>{
 	let editedCustomer = req.body;
-
-	const namesObject = {
-		first	: editedCustomer.names.first,
-		last 	: editedCustomer.names.last,
-	};
-
-	const addressObject = {
-		line1	: (editedCustomer.line1)? editedCustomer.line1 : "",
-		line2	: (editedCustomer.line2)? editedCustomer.line2 : "",
-		city	: (editedCustomer.city)? editedCustomer.city : "",
-		state	: (editedCustomer.state)? editedCustomer.state : "",
-		zipCode	: (editedCustomer.zipCode)? editedCustomer.zipCode : "",
-		country	: (editedCustomer.country)? editedCustomer.country : ""
-	};
-
-	editedCustomer.names 	= namesObject;
-	editedCustomer.address 	= addressObject;
 	
 	Customer.replaceOne(
 		{ _id : editedCustomer['_id']},
@@ -123,10 +88,6 @@ router.post(`/update`, (req, res, next)=>{
 				message		: `Customer updated successfully`
 			});
 		}
-
-
-
-
 	);
 });
 

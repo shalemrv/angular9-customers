@@ -2,16 +2,27 @@
 	padding: 30px 20px 15px 20px;
 	text-align: center;
 	display: grid;
-	grid-template-columns: 9fr 1fr;
+	grid-template-columns: 1fr auto 1fr;
 }
 .page-header .grid-list-button{
-	/* border-radius: 50%; */
+	border-radius: 500px;
+	display: inline-block;
+	transition: all 100ms ease-in;
+	cursor: pointer;
+	padding: 0 10px 0 0;
 }
 .page-header svg{	
 	width: 50px;
 	height: 50px;
-	padding: 10px;
+	padding: 15px;
+	color: white;
 }
+
+.grid-list-button:hover{
+	background-color: rgba(54, 17, 89, 0.85);
+	transform: scale(1.15);
+}
+
 
 .cCard{
 	width: 100%;	
@@ -22,11 +33,24 @@
 	grid-column-gap: 5px;
 	margin: 20px;
 	/* background-color: #13111c; */
-	border: 3px solid #828d9e;
+	border: 3px solid #1d1d1d;
 	border-radius: 10px 30px 10px 30px;
 	color: white;
+	transition: all 150ms ease-in;
+}
+.gridActionButtons{
+	visibility: hidden !important;
+	transition: all 150ms ease;
 }
 
+.cCard:hover{
+	transform: scale(1.05);
+	border: 3px solid #2A9FD6;
+}
+
+.cCard:hover .gridActionButtons{
+	visibility: visible !important;
+}
 
 .label, .value{
 	display: block;
@@ -51,8 +75,39 @@
 
 td, th{
 	text-shadow: 0 0 5px black;
+	cursor: default;
 }
 
 .input-group{
 	box-shadow: 0 0 5px #828d9e;
 }
+table{
+	overflow-x: hidden !important;
+}
+
+.tableModifyDiv{
+	position: absolute;
+	padding-top: 0.5rem;
+	z-index: -1;
+}
+
+tbody:hover .tableModifyDiv{
+	z-index: 0;
+}
+.lastCell{
+	transition: all 100ms ease-in;
+}
+tbody:hover td.lastCell{
+	display: none;
+}
+
+.shiftRight{
+	transition: all 100ms ease-in;
+	z-index: -1;
+}
+
+tbody:hover .shiftRight{
+	z-index: -1;
+	transform: translateX(5rem);
+}
+

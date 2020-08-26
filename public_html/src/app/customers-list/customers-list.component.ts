@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Customer} from './customer';
+import Swal from 'sweetalert2';
+import { $ } from 'protractor';
 
 @Component({
 	selector	: 'app-customers-list',
@@ -16,7 +18,7 @@ export class CustomersListComponent implements OnInit {
 	editingCustomer = new Customer;
 	newCustomer =  new Customer;
 	customersList 	= [];
-	gridView		= true;
+	gridView		= false;
 	
 	toggleGridView = (turnOn : boolean)=>{
 		this.gridView = turnOn;
@@ -38,7 +40,10 @@ export class CustomersListComponent implements OnInit {
 
 				customerIds = this.customersList.map(customer => { return parseInt(customer.customerNumber) });
 				
-				this.newCustomer.customerNumber = Math.max(...customerIds) + 1;
+				this.newCustomer.customerNumber = `${Math.max(...customerIds) + 1}`;
+				this.newCustomer.zipCode = `560089`;
+				this.newCustomer.country = `India`;
+				this.newCustomer.salesRepEmpNumber = `105${Math.max(...customerIds) + 1}`;
 			}
 		);
 	}
@@ -49,10 +54,11 @@ export class CustomersListComponent implements OnInit {
 			this.newCustomer
 		).subscribe((response)=>{
 			if(!response["complete"]){
-				alert(response["message"]);
+				Swal.fire("", response["message"], "error");
 				return;
 			}
-			alert(response["message"]);
+			this.getCustomersList();
+			Swal.fire("", response["message"], "success");
 		});
 	}
 
@@ -68,21 +74,45 @@ export class CustomersListComponent implements OnInit {
 			`http://127.0.0.1:54321/api/customer/update`,
 			this.editingCustomer
 		).subscribe((response)=>{
-			console.log("update API");
-			console.log(response);
+			if(!response["complete"]){
+				Swal.fire("", response["message"], "error");
+				return;
+			}
+			Swal.fire("", response["message"], "success");
 		});
 	}
 
-	deleteThisCustomer(customerId:any){
-		this.http.delete(
-			`http://127.0.0.1:54321/api/customer/${customerId}`
-		).subscribe((response)=>{
-			if(!response["complete"]){
-				alert("Unable to delete customer.");
+	deleteThisCustomer(customer:any){
+		
+		Swal.fire({
+		  title: 'Confirmation',
+		  text: `${customer.customerName} will be deleted.`,
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if(!result.value) {
+				Swal.fire(
+					'Cancelled.',
+					'You have cancelled the delete request.',
+					'info'
+				);
 				return;
 			}
-			this.getCustomersList();
-		});
+
+			this.http.delete(
+				`http://127.0.0.1:54321/api/customer/${customer._id}`
+			).subscribe((response)=>{
+				if(!response["complete"]){
+					Swal.fire("", response["message"], "error");
+					return;
+				}
+				this.getCustomersList();
+				Swal.fire("", response["message"], "success");
+			});
+		});		
 	}
 
 	ngOnInit(){
