@@ -1,21 +1,20 @@
-.page-header{
-	padding: 30px 20px 15px 20px;
+#page-header{
+	width: 100vw !important;
+	max-width: 100vw !important;
 	text-align: center;
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
+	position: sticky;
+	top: 0;
+	left: 0;
+	
+	background-color: #923cb5;
+	background-image: linear-gradient(0, #923cb5 0%, #000000 50%, #000000 74%);
+
+	box-shadow: 0 5px 10px #923cb5;
+
+	z-index: 10000;
 }
-.page-header .grid-list-button{
-	border-radius: 500px;
-	display: inline-block;
-	transition: all 100ms ease-in;
-	cursor: pointer;
-	padding: 0 10px 0 0;
-}
-.page-header svg{	
-	width: 50px;
-	height: 50px;
-	padding: 15px;
-	color: white;
+#page-header td{
+	padding: 1rem 0.5rem;
 }
 
 .grid-list-button:hover{
@@ -23,20 +22,33 @@
 	transform: scale(1.15);
 }
 
-
 .cCard{
-	width: 100%;	
-	border-radius: 10px;
-	padding:15px;
+	width: 100%;
+	padding:1rem;
 	display:grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 5px;
-	margin: 20px;
-	/* background-color: #13111c; */
+	grid-column-gap: 0.1rem;
+	margin: 1.5rem;
 	border: 3px solid #1d1d1d;
 	border-radius: 10px 30px 10px 30px;
 	color: white;
 	transition: all 150ms ease-in;
+	position: relative;
+	overflow: hidden;
+}
+.cCard::before{
+	content: '';
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 50%;
+	z-index: -1;
+	position: absolute;
+	background: #2A9FD6;
+	opacity: 0.1;
+	box-shadow: 5px 0 7px #2A9FD6;
+	border-radius: 0 50px 80px 0;
+	border-radius: 0;
 }
 .gridActionButtons{
 	visibility: hidden !important;

@@ -1,33 +1,50 @@
-<div class="page-header">
-	<div style="text-align: left;">
-		<span *ngIf="gridView" class="grid-list-button" (click)="toggleGridView(false)">
-			<svg class="bi bi-list-ul" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-			</svg>
-			&nbsp;
-			List View
-			&nbsp;
-		</span>
-		<span *ngIf="!gridView" class="grid-list-button" (click)="toggleGridView(true)">
-			<svg class="bi bi-grid-3x2-gap-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9z"/>
-			</svg>
-			&nbsp;
-			Grid View
-			&nbsp;
-		</span>
-	</div>
-	<div>
-		<h3>Customers List ({{customersList.length}})</h3>
-	</div>
-	<div style="text-align: right;">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCustomerModal">Add Customer</button>	
-	</div>
-</div>
+<table id="page-header">
+	<tr>
+		<td>
+			<button	
+				*ngIf="gridView"
+				(click)="toggleGridView(false)"
+				type="button"
+				class="btn btn-info btn-sm"
+			>
+				<svg class="bi bi-list-ul" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+				</svg>
+				&nbsp;
+				List View
+				&nbsp;
+			</button>
+			<button
+				*ngIf="!gridView"
+				(click)="toggleGridView(true)"
+				type="button"
+				class="btn btn-info btn-sm"
+			>
+				<svg class="bi bi-grid-3x2-gap-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					<path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V9z"/>
+				</svg>
+				&nbsp;
+				Grid View
+				&nbsp;
+			</button>
+		</td>
+		<td>
+			<h5>Customers List ({{customersList.length}})</h5>
+		</td>
+		<td>
+			<button
+				type="button"
+				class="btn btn-info btn-sm"
+				data-toggle="modal"
+				data-target="#addCustomerModal"
+			>Add Customer</button>	
+		</td>
+	</tr>
+</table>
 
 <!-- Grid View -->
-<div style="margin: 10px 25px 10px 0;" *ngIf="gridView">
-	<div class="container-fluid">
+<div style="padding: 10px 0 10px 0;" *ngIf="gridView">
+	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let customer of customersList">
 				<div class="cCard">
@@ -100,14 +117,14 @@
 <!-- List View -->
 <div style="text-align: center; margin : 20px 40px;" *ngIf="!gridView">
 	<table class="table table-hover">
-		<tr class="table-warning">
-			<th>ID</th>
-			<th>Name</th>
-			<th>Company</th>
-			<th>Phone</th>
-			<th>Address</th>
-			<th>Sales Rep</th>
-			<th>Credit Limit</th>
+		<tr class="table-warning" >
+			<th style="position: sticky !important;">ID</th>
+			<th style="position: sticky !important;">Name</th>
+			<th style="position: sticky !important;">Company</th>
+			<th style="position: sticky !important;">Phone</th>
+			<th style="position: sticky !important;">Address</th>
+			<th style="position: sticky !important;">Sales Rep</th>
+			<th style="position: sticky !important;">Credit Limit</th>
 		</tr>
 		<tbody *ngFor="let customer of customersList; let indexOfelement=index;" style="position: relative;">
 			<div class="tableModifyDiv">
@@ -137,7 +154,7 @@
 					{{customer.country}} - {{customer.zipCode}}
 				</td>
 				<td>{{customer.salesRepEmpNumber}}</td>
-				<td class="lastCell">$ {{customer.creditLimit}}</td>			
+				<td class="lastCell">$ {{customer.creditLimit}}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -293,12 +310,12 @@
 	</div>
 </div>
 
-<!-- Add new customer -->
+<!-- Add New customer -->
 <div class="modal fade" id="addCustomerModal">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title">Add new Customer</h5>
+		  <h5 class="modal-title">Add New Customer</h5>
 		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		  </button>
