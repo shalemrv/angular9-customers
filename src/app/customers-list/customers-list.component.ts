@@ -3,6 +3,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Customer} from './customer';
 import Swal from 'sweetalert2';
 import { $ } from 'protractor';
+import { environment } from '../../environments/environment';
 
 @Component({
 	selector	: 'app-customers-list',
@@ -15,10 +16,13 @@ export class CustomersListComponent implements OnInit {
 
 	constructor(private http: HttpClient) { }
 	
+	baseUrl = environment.baseUrl;
+	
 	editingCustomer = new Customer;
-	newCustomer =  new Customer;
+	newCustomer 	=  new Customer;
 	customersList 	= [];
 	gridView		= false;
+	dataLoading		= false;
 	
 	toggleGridView = (turnOn : boolean)=>{
 		this.gridView = turnOn;
@@ -26,8 +30,10 @@ export class CustomersListComponent implements OnInit {
 	
 	getCustomersList(){
 		console.log("Angular retriving List.");
-		this.http.get(`http://127.0.0.1:54321/api/customer/list`).subscribe(
+		this.dataLoading = true;
+		this.http.get(`${this.baseUrl}/api/customer/list`).subscribe(
 			(response)=>{
+				this.dataLoading = false;
 				if(!response["complete"]){
 					this.customersList = [];
 					alert("Unable to fetch the list of Customers");
@@ -49,10 +55,12 @@ export class CustomersListComponent implements OnInit {
 	}
 	
 	addNewCustomer(){
+		this.dataLoading = true;
 		this.http.post(
-			`http://127.0.0.1:54321/api/customer/add`,
+			`${this.baseUrl}/api/customer/add`,
 			this.newCustomer
 		).subscribe((response)=>{
+			this.dataLoading = false;
 			if(!response["complete"]){
 				Swal.fire("", response["message"], "error");
 				return;
@@ -69,11 +77,12 @@ export class CustomersListComponent implements OnInit {
 	submitEditedCustomer(){
 		console.log(`submitEditedCustomer`);
 		console.log(this.editingCustomer);
-
+		this.dataLoading = true;
 		this.http.post(
-			`http://127.0.0.1:54321/api/customer/update`,
+			`${this.baseUrl}/api/customer/update`,
 			this.editingCustomer
 		).subscribe((response)=>{
+			this.dataLoading = false;
 			if(!response["complete"]){
 				Swal.fire("", response["message"], "error");
 				return;
@@ -101,10 +110,11 @@ export class CustomersListComponent implements OnInit {
 				);
 				return;
 			}
-
+			this.dataLoading = true;
 			this.http.delete(
-				`http://127.0.0.1:54321/api/customer/${customer._id}`
+				`${this.baseUrl}/api/customer/${customer._id}`
 			).subscribe((response)=>{
+				this.dataLoading = false;
 				if(!response["complete"]){
 					Swal.fire("", response["message"], "error");
 					return;

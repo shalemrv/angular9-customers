@@ -42,6 +42,10 @@
 	</tr>
 </table>
 
+<div *ngIf="dataLoading" id="loadingContainer">
+	<img src="/assets/img/loading.gif">
+</div>
+
 <!-- Grid View -->
 <div style="padding: 10px 0 10px 0;" *ngIf="gridView">
 	<div style="padding-right: 3rem; overflow-x: hidden !important;">
